@@ -1,0 +1,266 @@
+:root{
+    --sidebar-width: 220px;
+    --sidebar-width-collapsed: 70px;
+    --transition: 0.3s ease;
+}
+
+body{
+    margin: 0;
+    display: flex;
+    min-height: 100vh;
+}
+
+/* sidebar */
+.sidebar{
+    width: var(--sidebar-width);
+    transition: var(--transition);
+    background: #111;
+    color: white;
+    height: 100vh;
+    position: fixed;
+    left: 0;
+    top: 0;
+}
+
+.sidebar.collapsed{
+    width: var(--sidebar-width-collapsed);
+}
+
+/* Nav Links */
+.sidebar .nav-link{
+    color: #ccc;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 12px 20px;
+    white-space: nowrap;
+    transition: background 0.2s ease, color 0.2s ease;
+}
+
+.sidebar .nav-link:hover{
+    background: #222;
+    color: white;
+    border-radius: 10px;
+}
+
+.sidebar .nav-item{
+    margin: 4px 8px;
+}
+
+.sidebar .nav-link i{
+    font-size: 1.4rem;
+}
+
+.sidebar.collapsed .nav-link{
+    justify-content: center;
+    padding: 12px 0;
+}
+
+.sidebar .nav-link.active{
+    background: #222;
+    color: white;
+    font-weight: 500;
+    border-radius: 10px;
+}
+
+.sidebar.collapsed .toggle-btn{
+    text-align: center;
+    padding: 15px 0;
+}
+
+.sidebar:not(.collapsed) .toggle-btn{
+    margin: 4px 8px;
+    padding: 12px 20px;
+    width: calc(100% - 16px);
+    display: flex;
+    align-items: center;
+}
+
+
+/* Hide text when */
+.sidebar.collapsed .link-text{
+    display: none;
+}
+
+/* Main content */
+.main-content{
+    flex-grow: 1;
+    padding: 20px;
+    background: #f4f4f4;
+}
+
+/* Toggle button */
+.toggle-btn{
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.4rem;
+    padding: 15px 20px;
+    width: 100%;
+    text-align: left;
+}
+
+/* Side bar divider */
+.sidebar-divider{
+    border: none;
+    height: 1px;
+    background: white;
+    margin: 8px 16px;
+}
+
+/* Top layout */
+.layout{
+    margin-left: var(--sidebar-width);
+    width: calc(100% - var(--sidebar-width));
+    transition: var(--transition);
+}
+
+.sidebar.collapsed ~ .layout{
+    margin-left: var(--sidebar-width-collapsed);
+    width: calc(100% - var(--sidebar-width-collapsed));
+}
+
+/* Top Nav */
+.top-nav{
+    height: 60px;
+    background: #111;
+    color: white;
+    display: flex;
+    align-items: center;
+    padding: 0 15px 0 20px;
+}
+
+.top-left{
+    display: flex;
+    align-items: center;
+    gap: 20px;   
+}
+
+/* Logo/Brand */
+.brand{
+    font-size: 1.2rem;
+    font-weight: 500;
+}
+
+/* Search bar */
+.search-wrapper{
+    display: flex;
+    align-items: center;
+    background: #1f1f1f;
+    border-radius: 25px;
+    padding: 6px 14px;
+    gap: 8px;  
+}
+
+.search-wrapper input{
+    background: transparent;
+    border: none;
+    outline: none;
+    color: white;
+    width: 380px;
+}
+
+.search-wrapper input::placeholder{
+    color: #aaa;
+}
+
+.search-wrapper:focus-within{
+    background: #2a2a2a;
+}
+
+/* Account */
+.account{
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    padding: 6px 12px;
+    border-radius: 20px;
+    transition: background 0.2s ease;
+    font-size: 1.6rem;
+    margin-left: auto;
+    position: relative;
+}
+
+.account:hover{
+    background: #1f1f1f;
+}
+
+.account-dropdown{
+    position: absolute;
+    top: 50px;
+    right: 0;
+    width: 240px;
+    background: #1a1a1a;
+    border-radius: 6px;
+    padding: 8px 0;
+    display: none;
+    flex-direction: column;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+    border: 1px solid #2a2a2a;
+    animation: dropdownFade 0.18s ease-out;
+    z-index: 1000;
+}
+
+.dropdown-header{
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 18px;
+}
+
+.avatar{
+    width: 42px;
+    height: 40px;
+    background: #2a2a2a;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+}
+
+.user-info .name{
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: white;
+}
+
+.account-dropdown a{
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 18px;
+    margin: 2px 8px;
+    color: #ccc;
+    text-decoration: none;
+    font-size: 0.9rem;
+    border-radius: 10px;
+    transition: all 0.2s ease;
+}
+
+.account-dropdown a:hover{
+    background: #2a2a2a;
+    border-radius: 10px;
+}
+
+.account-dropdown hr{
+    border: none;
+    height: 1px;
+    background: #333;
+    margin: 8px 12px;
+}
+
+.account.active .account-dropdown{
+    display: flex;
+}
+@keyframes fadeIn{
+    from{
+        opacity: 0;
+        transform: translateY(-5px);
+    }
+    to{
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
