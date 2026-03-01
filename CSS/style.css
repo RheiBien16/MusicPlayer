@@ -264,3 +264,169 @@ body{
         transform: translateY(0);
     }
 }
+
+/* Music/Audio player */
+.music-player{
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 90px;
+    background: #111;
+    border-top: 1px solid #222;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 25px;
+    z-index: 2000;
+}
+
+.player-left{
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 25%;
+}
+
+.cover{
+    width: 55px;
+    height: 55px;
+    border-radius: 8px;
+    object-fit: cover;
+}
+
+.song-title{
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: white;
+}
+
+.song-artist{
+    font-size: 0.75rem;
+    color: #aaa;
+}
+
+.player-center{
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+}
+
+.controls{
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    font-size: 1.2rem;
+    color: #ccc;
+}
+
+.controls i{
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.controls i:hover{
+    color: white;
+}
+
+.play-btn{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: white;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.play-btn i{
+    color: black;
+    font-size: 1.3rem;
+}
+
+.progress-container{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+}
+
+.progress-bar{
+    width: 100%;
+    height: 4px;
+    cursor: pointer;
+}
+
+.progress-container .time{
+    color: white;
+}
+
+.player-right{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 25%;
+    justify-content: flex-end;
+}
+
+.volume-bar{
+    width: 100px;
+    height: 4px;
+}
+
+.player-right i{
+    color: white;
+}
+
+/* Main Content */
+.main-content{
+    padding: 25px;
+    padding-bottom: 120px;
+    background: #222222;
+    color: white;
+    min-height: calc(100vh - 60px);
+}
+
+.card-grid{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.music-card{
+    background: #181818;
+    padding: 16px;
+    border-radius: 14px;
+    transition: 0.25s ease;
+    cursor: pointer;
+}
+
+.music-card:hover{
+    background-color: #282828;
+}
+
+.music-card img{
+    width: 100%;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+.music-card h5{
+    font-size: 0.95rem;
+    margin: 0;
+}
+
+.music-card p{
+    font-size: 0.8rem;
+    color: #aaa;
+    margin: 4px 0 0;
+}
+
+.customized{
+    margin-top: 20px;
+    color: #ffffff;
+}
