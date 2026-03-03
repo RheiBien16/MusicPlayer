@@ -463,3 +463,38 @@ html, body{
 .main-content::-webkit-scrollbar-thumb:hover{
     background: #555;
 }
+
+/* Hover play button */
+.image-wrapper{
+    position: relative;
+}
+
+.play-hover-btn{
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    border: none;
+    background: #217186;
+    color: black;
+    font-size: 1.4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transform: translate(10px);
+    transition: all 0.25s ease;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+    cursor: pointer;
+}
+
+.music-card:hover .play-hover-btn{
+    opacity: 1;
+    transform: translate(0);
+}
+
+.play-hover-btn:hover{
+    transform: scale(1.1);
+}
