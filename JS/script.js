@@ -42,7 +42,25 @@ document.addEventListener("DOMContentLoaded", function () {
     const nextBtn = document.getElementById("nextBtn");
     const prevBtn = document.getElementById("prevBtn");
 
-    let currentIndex = -1;
+    let currentAlbum = null;
+    let currentSongIndex = 0;
+
+    const albums = {
+        album1: [
+            {
+                title: "God was showing off",
+                artist: "Bruno Mars",
+                cover: "Media/Images/23f8fb8d-fee1-40d3-b361-5b7096f649ef.jpg",
+                audio: "Media/Music/God Was Showing Off.mp3"
+            },
+            {
+                title: "On my soul",
+                artist: "Bruno Mars",
+                cover: "Media/Images/23f8fb8d-fee1-40d3-b361-5b7096f649ef.jpg",
+                audio: "Media/Music/Bruno Mars - On My Soul [Official Audio].mp3"
+            }
+        ]
+    };
 
     const songs = Array.from(cards).map(card => ({
         title: card.dataset.title,
@@ -52,15 +70,11 @@ document.addEventListener("DOMContentLoaded", function () {
         element: card
     }));
 
-    function loadSong(index) {
-        const song = songs[index];
-
+    function loadSong(song) {
         audio.src = song.audio;
         playerTitle.textContent = song.title;
         playerArtist.textContent = song.artist;
         playerCover.src = song.cover;
-
-        currentIndex = index;
     }
 
     function playSong() {
@@ -95,19 +109,38 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Card click
     cards.forEach((card, index) => {
-        const btn = card.querySelector(".play-hover-btn");
+    const btn = card.querySelector(".play-hover-btn");
 
-        btn.addEventListener("click", function (e) {
-            e.stopPropagation();
+    btn.addEventListener("click", function (e) {
+        e.stopPropagation();
 
-            if (currentIndex === index) {
-                audio.paused ? playSong() : pauseSong();
-                return;
+        // 🎵 ALBUM CARD
+        if (card.dataset.albumId) {
+
+            const albumId = card.dataset.albumId;
+            currentAlbum = albums[albumId];
+            currentSongIndex = 0;
+
+            loadSong(currentAlbum[currentSongIndex]);
+            audio.play();
+            return;
+        }
+
+        // 🎵 SINGLE SONG CARD
+        if (card.dataset.audio) {
+
+            const song = {
+                title: card.dataset.title,
+                artist: card.dataset.artist,
+                cover: card.dataset.cover,
+                audio: card.dataset.audio
+            };
+
+            currentAlbum = null;
+
+                loadSong(song);
+                audio.play();
             }
-
-            loadSong(index);
-            playSong();
-            updateCardIcons();
         });
     });
 
@@ -119,22 +152,39 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Next
     nextBtn.addEventListener("click", function () {
-        if (currentIndex < songs.length - 1) {
-            loadSong(currentIndex + 1);
-        } else {
-            loadSong(0);
+
+        if (currentAlbum) {
+
+            if (currentSongIndex < currentAlbum.length - 1) {
+                currentSongIndex++;
+            } else {
+                currentSongIndex = 0;
+            }
+
+            loadSong(currentAlbum[currentSongIndex]);
+            audio.play();
         }
-        playSong();
-    });
+    });                                                           
 
     // Previous
     prevBtn.addEventListener("click", function () {
-        if (currentIndex > 0) {
-            loadSong(currentIndex - 1);
-        } else {
-            loadSong(songs.length - 1);
+
+        if (currentAlbum) {
+
+            if (currentSongIndex > 0) {
+                currentSongIndex--;
+            } else {
+                currentSongIndex = currentAlbum.length - 1;
+            }
+
+            loadSong(currentAlbum[currentSongIndex]);
+            audio.play();
         }
-        playSong();
+    });
+
+    // autoplay
+    audio.addEventListener("ended", function () {
+        nextBtn.click();
     });
 
     // Progress bar update
@@ -177,3 +227,19 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
 });
+
+/* Play songs by album */
+const albums = {
+    album1:[
+        {
+            title: "God was showing off",
+            artist: "Bruno Mars",
+            audio: "Media/Music/God Was Showing Off.mp3"
+        },
+        {
+            title: "On my soul",
+            artist: "Bruno Mars",
+            audio: "Media/Music/Bruno Mars - On My Soul [Official Audio].mp3"
+        }
+    ]
+};
